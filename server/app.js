@@ -3,7 +3,12 @@ const app = express();
 const mongoose = require("mongoose");
 const PORT = 5000; //this is port
 // zrV00XU3xby6khZr
-const{MONGOURI} = require("./keys")
+const{MONGOURI} = require("./keys");
+ require("./models/user");
+
+ app. use(express.json());
+ app.use(require("./routes/auth.js"));
+
 
 mongoose.connect(MONGOURI)
 mongoose.connection.on('connected',()=>{
