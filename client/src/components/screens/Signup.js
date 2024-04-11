@@ -20,7 +20,7 @@ return (
    placeholder="password"
    />
 
-<a className="waves-effect waves-light btn-small #42a5f5 blue lighten-1">signup</a>
+<a className="waves-effect waves-light btn-small #42a5f5 blue darken-1">signup</a>
 
 <h5>
     <Link to="/Login">Already have an account ?</Link>
