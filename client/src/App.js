@@ -9,10 +9,20 @@ import Profile from './components/screens/Profile';
 import CreatePost from './components/screens/CreatePost'
 import {reducer,initialState} from './reducers/userReducer'
 
-const userContext = createContext();
+export const userContext = createContext();
 
 const Routing = ()=>{
   const navigate = useNavigate();
+  useEffect(()=>{
+  const user = JSON.parse(localStorage.getItem("user"))
+ if(user)
+ {
+  navigate('/')
+ }else{
+  navigate('/Login');
+ }
+  },[]);
+
   return(
     
 <Routes>
