@@ -39,6 +39,8 @@ const Signup= ()=>{
             M.toast({html:data.message,classes:"#388e3c green darken-2"})
             navigate('/Login')
            }
+        }).catch(err=>{
+            console.log(err)
         })
     
     }
