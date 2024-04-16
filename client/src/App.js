@@ -1,4 +1,4 @@
-import React,{useEffect,createContext,useReducer} from 'react';
+import React,{useEffect,createContext,useReducer,useContext} from 'react';
 import Navbar from './components/navbar';
 import "./App.css"
 import {BrowserRouter,Routes,Route,useNavigate} from 'react-router-dom'
@@ -9,14 +9,17 @@ import Profile from './components/screens/Profile';
 import CreatePost from './components/screens/CreatePost'
 import {reducer,initialState} from './reducers/userReducer'
 
-export const userContext = createContext();
+export const UserContext = createContext();
 
 const Routing = ()=>{
   const navigate = useNavigate();
+  // const {state,dispatch} = useContext(UserContext);
   useEffect(()=>{
+   
   const user = JSON.parse(localStorage.getItem("user"))
  if(user)
  {
+  // dispatch({type:"USER",payload:user});
   navigate('/')
  }else{
   navigate('/Login');
@@ -40,12 +43,12 @@ function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <>
-    <userContext.Provider value={{state,dispatch}}>
+    <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>
     <Navbar/>
     <Routing/>
     </BrowserRouter>
-    </userContext.Provider>
+    </UserContext.Provider>
     </>
 
   )
