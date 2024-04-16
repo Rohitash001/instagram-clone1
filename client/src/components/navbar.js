@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 const Navbar = ()=>{
   const {state,dispatch} = useContext(UserContext);
   const renderList = ()=>{
     if(state){
       return [
-        <li><a href="/Profile">Profile</a></li>,
-        <li><a href="/CreatePost">CreatePost</a></li>
-      ]
+        <li><Link to="/Profile">Profile</Link></li>,
+        <li><Link to="/CreatePost">CreatePost</Link></li>
+      ] 
     }
     else{
-      return[ <li><a href="/Login">Login</a></li>,
-      <li><a href="/Signup">signup</a></li>
+      return[ <li><Link to="/Login">Login</Link></li>,
+      <li><Link to="/Signup">signup</Link></li>
 
       ]
     }
@@ -19,7 +20,7 @@ const Navbar = ()=>{
     return(
         <nav>
         <div className="nav-wrapper white">
-          <a href={state?"/":"/Login"} className="brand-logo left">Instagram</a>
+          <Link to={state?"/":"/Login"} className="brand-logo left">Instagram</Link>
           <ul id="nav-mobile" className="right ">
            {renderList()}
            
