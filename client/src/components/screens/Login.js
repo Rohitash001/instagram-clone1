@@ -65,7 +65,7 @@ return (
    />
    
     <input
-   type="text"
+   type="password"
    placeholder="password"
    value={password}
    onChange={(e)=>
@@ -73,9 +73,9 @@ return (
   }
    />
 
-<a className="waves-effect waves-light btn-small #42a5f5 blue darken-1"
+<button className="waves-effect waves-light btn-small #42a5f5 blue darken-1"
 onClick={()=>postData()}
->Signin</a>
+>Signin</button>
 
 <h5>
     <Link to="/signup">Don't have an account ?</Link>

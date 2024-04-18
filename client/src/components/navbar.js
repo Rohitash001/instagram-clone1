@@ -1,13 +1,21 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 const Navbar = ()=>{
   const {state,dispatch} = useContext(UserContext);
+  const navigate = useNavigate();
   const renderList = ()=>{
     if(state){
       return [
         <li><Link to="/Profile">Profile</Link></li>,
-        <li><Link to="/CreatePost">CreatePost</Link></li>
+        <li><Link to="/CreatePost">CreatePost</Link></li>,
+        <li><button className="btn #f44336 red"
+        onClick={()=>{
+          localStorage.clear();
+          dispatch({type:"CLEAR"});
+          navigate("/Login");
+        }}
+        >Logout</button></li>
       ] 
     }
     else{
