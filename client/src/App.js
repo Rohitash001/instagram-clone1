@@ -20,7 +20,7 @@ const Routing = ()=>{
  if(user)
  {
   dispatch({type:"USER",payload:user});
-  navigate('/')
+  // navigate('/')
  }else{
   navigate('/Login');
  }

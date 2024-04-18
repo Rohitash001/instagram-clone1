@@ -1,7 +1,21 @@
-import React from "react";
+import React,{useEffect,useState,useContext} from "react";
+import {UserContext} from '../../App'
 
 
 const Profile = ()=>{
+    const [mypics,setPics] = useState([]);
+    const {state,dispatch} = useContext(UserContext)
+    useEffect(()=>{
+     fetch("/mypost",{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+
+        }
+     }).then(res=>res.json())
+     .then(result=>{
+       setPics(result.mypost);
+     })
+    },[])
 return (
     <div style={{
         maxWidth:"550px",
@@ -18,7 +32,7 @@ return (
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
             </div>
             <div>
-             <h4>perry perry</h4>
+             <h4>{state?state.name:"loading"}</h4>
              <div style={{
                  display:"flex",
                  justifyContent:"space-between",
@@ -31,27 +45,15 @@ return (
             </div>
         </div>
         <div className="gallery">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
-        
+            {
+                mypics.map(item=>{
+                    return(
+                    <img src={item.photo} alt={item.title}/>
+                    )
+                })
+            }
+  
+  
         </div>
     </div>
 
