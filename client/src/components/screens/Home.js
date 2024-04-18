@@ -14,6 +14,40 @@ const Home = ()=>{
       setData(result.posts);
     })
    },[])
+
+   const likePost = (id)=>{
+      fetch('/like',{
+         method:"put",
+         headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+         
+         },
+         body:JSON.stringify({
+            postId:id
+         })
+      }).then(res=>res.json())
+      .then(result=>{
+         console.log(result);
+      })
+   }
+
+   const unlikePost = (id)=>{
+      fetch('/unlike',{
+         method:"put",
+         headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+         
+         },
+         body:JSON.stringify({
+            postId:id
+         })
+      }).then(res=>res.json())
+      .then(result=>{
+         console.log(result);
+      })
+   }
 return (
   
    <div className="Home">
@@ -27,6 +61,9 @@ return (
      </div>
      <div className="card-content">
      <i className="material-icons" style={{color:"red"}}>favorite</i>
+     <i className="material-icons" onClick={()=>{likePost(item._id)}}>thumb_up</i>
+     <i className="material-icons"onClick={()=>{unlikePost(item._id)}}>thumb_down</i>
+        <h6>{item.likes.length} likes</h6>
         <h6>{item.title}</h6>
         <p>{item.body}</p>
         <input type="text" placeholder="add a comment"/>

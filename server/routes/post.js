@@ -52,4 +52,41 @@ router.post("/createpost",requirelogin,(req,res)=>{
 
 })
 
+router.put("/like",requirelogin,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+    $push:{likes:req.user._id}
+    
+}
+,{
+    new:true
+}
+).then((result)=>{
+    
+        return res.json({error:err})
+    
+    })
+
+.catch((err)=>{
+    console.log(err);
+     return res.status(422).json({error:err})
+})
+})
+
+
+router.put("/unlike",requirelogin,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+    $pull:{likes:req.user._id}
+},{
+    new:true
+}).then((result)=>{
+    
+        return res.json({error:err})
+    
+    })
+
+.catch((err)=>{
+     return res.status(422).json({error:err})
+})
+})
+
 module.exports = router
