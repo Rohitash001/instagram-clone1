@@ -112,5 +112,48 @@ router.put("/comment",requirelogin,(req,res)=>{
 })
 })
 
+router.delete("/deletepost/:postId",requirelogin, async (req,res)=>{
+    try{
+   const post = await Post.findOne({_id:req.params.postId})
+    .populate("postedBy","_id")
+    
+      
+    if(!post)
+    {
+        ({error:"post not found"})
+    }
+    if (post.postedBy._id.toString() !== req.user._id.toString()) {
+        return res.status(403).json({ error: "Unauthorized access" });
+      }
+  
+      const result = await post.deleteOne();
+      res.json(result);
+      
+    } catch(err){
+        return res.status(422).json({error:err}) 
+    }
+
+//    Post.findOne({_id:req.params.postId})
+//    .populate({path:"PostedBy"},"_id")
+//    .then(post=>{
+//     if(!post)
+//     {
+//         return res.status(403).json({error:"post not found"})
+//     }
+//     if (post.postedBy._id.toString() === req.user._id.toString()) {
+//               post.remove()
+//               .then(result=>{
+//                 res.send(result);
+//               }).catch(err=>{
+//                 console.log(err);
+//               })
+//               }
+    
+//    }).catch((err)=>{
+//     console.log(err);
+//      return res.status(422).json({error:err})
+// })
+})
+
 
 module.exports = router
