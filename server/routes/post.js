@@ -57,12 +57,10 @@ router.put("/like",requirelogin,(req,res)=>{
     $push:{likes:req.user._id}
     
 }
-,{
-    new:true
-}
-).then((result)=>{
+,{new:true
+}).then((result)=>{
     
-        return res.json({error:err})
+        return res.json(result)
     
     })
 
@@ -80,7 +78,7 @@ router.put("/unlike",requirelogin,(req,res)=>{
     new:true
 }).then((result)=>{
     
-        return res.json({error:err})
+        return res.json(result)
     
     })
 
