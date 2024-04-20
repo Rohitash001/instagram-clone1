@@ -12,7 +12,9 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    followers:[{type:mongoose.Schema.Types.ObjectID , res:"User"}],
+    following:[{type:mongoose.Schema.Types.ObjectID , res:"User"}],
 })
 
 mongoose.model("User",userSchema);
