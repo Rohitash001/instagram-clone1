@@ -102,7 +102,8 @@ return (
         }}>
             <div>
             <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6DIOJM-hqaZEq0c5VODVsdgGW6NzdO0W7VezGMhCGyg&s"/>
+           src={userProfile.user.pic}
+           />
             </div>
             <div>
              <h4>{userProfile.user.name}</h4>
@@ -112,7 +113,7 @@ return (
                  justifyContent:"space-between",
                  width:"108%"
              }}>
-                <h6>{userProfile.posts.length}</h6>
+                <h6>{userProfile.posts.length} posts</h6>
                 <h6> {userProfile.user.followers.length} followers </h6>
                 <h6> {userProfile.user.following.length} following</h6>
              </div>

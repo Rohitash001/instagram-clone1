@@ -74,6 +74,23 @@ router.put("/follow", requirelogin, async (req, res) => {
 
 
 
+router.put("/updatepic", requirelogin, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: { pic: req.body.pic } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 
